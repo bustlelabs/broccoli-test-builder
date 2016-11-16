@@ -22,12 +22,12 @@
   "dependencies": {
     "broccoli-amd-loader": "^0.1.0",
     "broccoli-babel-transpiler": "^5.2.3",
-    "broccoli-concat": "0.0.13",
-    "broccoli-funnel": "^0.2.3",
-    "broccoli-jshint": "^0.5.6",
-    "broccoli-merge-trees": "^0.2.1",
-    "broccoli-replace": "^0.3.1",
-    "lodash": "^3.10.0",
-    "qunitjs": "^1.18.0"
+    "broccoli-concat": "3.0.5",
+    "broccoli-funnel": "^1.0.9",
+    "broccoli-jshint": "^2.1.0",
+    "broccoli-merge-trees": "^1.1.4",
+    "broccoli-replace": "^0.12.0",
+    "lodash": "^4.17.2",
+    "qunitjs": "^2.0.1"
   }
 }
