@@ -29,19 +29,42 @@ function emberCLITestLoaderTree() {
 }
 
 function buildESLint(libDirName) {
-  var tree = new Merge([new Funnel(libDirName, {
-    include: ['**/*.js'],
-    destDir: '/tests/jshint'
-  }), new Funnel('./tests', {
-    include: ['**/*.js'],
-    destDir: '/tests/jshint'
-  })]);
-
-  tree = ESLint(tree, {
-    testGenerator: 'qunit'
-  });
-
-  return tree;
+  // var tree = new Merge([new Funnel(libDirName, {
+  //   include: ['*|)}>#*.js'],
+  //   destDir: '/tests/jshint'
+  // }), new Funnel('./tests', {
+  //   include: ['*|)}>#*.js'],
+  //   destDir: '/tests/jshint'
+  // })]);
+  //
+  return new Merge(
+    [
+      ESLint(
+        new Funnel(libDirName, {
+          include: ['**/*.js'],
+          destDir: '/tests/eslint'
+        }),
+        {
+          testGenerator: 'qunit'
+        }
+      ),
+      ESLint(
+        new Funnel('./tests', {
+          include: ['**/*.js'],
+          destDir: '/tests/eslint'
+        }),
+        {
+          testGenerator: 'qunit'
+        }
+      )
+    ]
+  )
+  //
+  // tree = ESLint(tree, {
+  //   testGenerator: 'qunit'
+  // });
+  //
+  // return tree;
 }
 
 function buildTestTree(options) {
