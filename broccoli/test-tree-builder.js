@@ -43,7 +43,9 @@ function buildTestTree(options) {
     modules: 'amdStrict'
   });
 
-  testJSTree = new Merge([testJSTree, ESLint(testJSTree)]);
+  testJSTree = new ESLint(testJSTree);
+  //
+  // testJSTree = new Merge([testJSTree, ESLint(testJSTree)]);
 
   testJSTree = new Concat(testJSTree, {
     inputFiles: ['**/*.js'],
