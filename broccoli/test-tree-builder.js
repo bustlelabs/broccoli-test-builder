@@ -4,6 +4,7 @@ var Concat = require('broccoli-concat');
 var Merge = require('broccoli-merge-trees');
 var amdLoader = require('broccoli-amd-loader');
 var testIndexBuilder = require('./test-index');
+var ESLint = require('broccoli-lint-eslint');
 
 var path = require('path');
 
@@ -41,6 +42,8 @@ function buildTestTree(options) {
     moduleIds: true,
     modules: 'amdStrict'
   });
+
+  testJSTree = new Merge([testJSTree, ESLint(testJSTree)]);
 
   testJSTree = new Concat(testJSTree, {
     inputFiles: ['**/*.js'],
