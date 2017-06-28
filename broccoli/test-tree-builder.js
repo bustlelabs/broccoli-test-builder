@@ -28,6 +28,22 @@ function emberCLITestLoaderTree() {
   });
 }
 
+function buildESLint(libDirName) {
+  var tree = new Merge([new Funnel(libDirName, {
+    include: ['**/*.js'],
+    destDir: '/tests/jshint'
+  }), new Funnel('./tests', {
+    include: ['**/*.js'],
+    destDir: '/tests/jshint'
+  })]);
+
+  tree = ESLint(tree, {
+    testGenerator: 'qunit'
+  });
+
+  return tree;
+}
+
 function buildTestTree(options) {
   if (!options) { options = {}; }
 
@@ -43,9 +59,7 @@ function buildTestTree(options) {
     modules: 'amdStrict'
   });
 
-  testJSTree = new ESLint(testJSTree, {
-    testGenerator: 'qunit'
-  });
+  testJSTree = new Merge([testJSTree, buildESLint(libDirName)]);
 
   testJSTree = new Concat(testJSTree, {
     inputFiles: ['**/*.js'],
