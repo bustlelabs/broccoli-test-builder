@@ -4,7 +4,7 @@ var Concat = require('broccoli-concat');
 var Merge = require('broccoli-merge-trees');
 var amdLoader = require('broccoli-amd-loader');
 var testIndexBuilder = require('./test-index');
-var ESLint = require('broccoli-lint-eslint');
+var esLintBuilder = require('./eslint-tree-builder');
 
 var path = require('path');
 
@@ -28,45 +28,6 @@ function emberCLITestLoaderTree() {
   });
 }
 
-function buildESLint(libDirName) {
-  // var tree = new Merge([new Funnel(libDirName, {
-  //   include: ['*|)}>#*.js'],
-  //   destDir: '/tests/jshint'
-  // }), new Funnel('./tests', {
-  //   include: ['*|)}>#*.js'],
-  //   destDir: '/tests/jshint'
-  // })]);
-  //
-  return new Merge(
-    [
-      ESLint(
-        new Funnel(libDirName, {
-          include: ['**/*.js'],
-          destDir: '/tests/eslint'
-        }),
-        {
-          testGenerator: 'qunit'
-        }
-      ),
-      ESLint(
-        new Funnel('./tests', {
-          include: ['**/*.js'],
-          destDir: '/tests/eslint'
-        }),
-        {
-          testGenerator: 'qunit'
-        }
-      )
-    ]
-  )
-  //
-  // tree = ESLint(tree, {
-  //   testGenerator: 'qunit'
-  // });
-  //
-  // return tree;
-}
-
 function buildTestTree(options) {
   if (!options) { options = {}; }
 
@@ -82,7 +43,7 @@ function buildTestTree(options) {
     modules: 'amdStrict'
   });
 
-  testJSTree = new Merge([testJSTree, buildESLint(libDirName)]);
+  testJSTree = new Merge([testJSTree, esLintBuilder.build(libDirName)]);
 
   testJSTree = new Concat(testJSTree, {
     inputFiles: ['**/*.js'],
