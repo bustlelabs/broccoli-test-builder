@@ -21,7 +21,7 @@
   "homepage": "https://github.com/201-created/broccoli-test-builder",
   "dependencies": {
     "broccoli-amd-loader": "^0.2.0",
-    "broccoli-babel-transpiler": "^5.6.2",
+    "broccoli-babel-transpiler": "^6.0.0",
     "broccoli-concat": "^3.2.0",
     "broccoli-funnel": "^1.1.0",
     "broccoli-lint-eslint": "^4.0.0",
