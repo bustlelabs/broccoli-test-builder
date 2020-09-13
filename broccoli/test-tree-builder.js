@@ -9,7 +9,7 @@ var esLintBuilder = require('./eslint-tree-builder');
 var path = require('path');
 
 function qunitTree() {
-  var qunitDir = path.dirname(require.resolve('qunitjs'));
+  var qunitDir = path.dirname(require.resolve('qunit'));
 
   return new Funnel(qunitDir, {
     include: [
